@@ -24,6 +24,7 @@ interface ITreeNodeData {
 
 export class Visual implements IVisual {
     private container: Selection<HTMLElement>;
+    private tree: OrgChart<any>;
 
     constructor(options: VisualConstructorOptions) {
         this.container = d3.select(options.element).append('div').classed('hierarchicalTreeVisual', true)
@@ -80,17 +81,16 @@ export class Visual implements IVisual {
         ));
         console.log("All data", allData);
 
-        if (options.type != powerbiVisualsApi.VisualUpdateType.Data) {
-            return;
-        }
-        console.log("Rendering tree");
-        new OrgChart<any>().container('.hierarchicalTreeVisual').data(allData).nodeWidth((d) => 250)
+      if (options.type == powerbiVisualsApi.VisualUpdateType.Data || options.type.valueOf() == 510) {
+        if (!this.tree) {
+          console.log("Initialize and render tree");
+          this.tree = new OrgChart<any>()
+            .container('.hierarchicalTreeVisual')
+            .data(allData)
             .svgHeight(height)
             .svgWidth(width)
-            .initialZoom(0.7)
-            .nodeHeight((d) => 175)
-            .nodeWidth((d) => 250)
-            .initialZoom(1)
+            .nodeHeight((d) => 200)
+            .nodeWidth((d) => 270)
             .childrenMargin((d) => 40)
             .compactMarginBetween((d) => 15)
             .compactMarginPair((d) => 80)
@@ -103,7 +103,7 @@ export class Visual implements IVisual {
                   <div > ${element.value}</div>    
                 </div>
               `
-            });
+              });
               return `
                 <div style="padding-top:30px;background-color:none;margin-left:1px;height:${d.height
                 }px;border-radius:2px;overflow:visible">
@@ -124,6 +124,22 @@ export class Visual implements IVisual {
             </div>
                 `;
             })
-            .render();
+            .render()
+            .fit();
+        }
+        else {
+          console.log("Update data and render tree");
+          this.tree
+            .data(allData)
+            .render()
+            .fit();
+        }
+      }
+      else {
+        if (!this.tree) return;
+        console.log("Just fit tree");
+        this.tree
+        .fit();
+      }
     }
 }
