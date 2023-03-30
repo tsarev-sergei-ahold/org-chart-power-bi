@@ -14,6 +14,11 @@
             "name": "name",
             "kind": "Grouping",
             "displayName": "Name"
+        },
+        {
+            "name": "properties",
+            "kind": "GroupingOrMeasure",
+            "displayName": "Data to Show"
         }
     ],
     "dataViewMappings": [
@@ -31,34 +36,19 @@
                     }
                 }
             ],
-            "table": {
-                "rows": {
-                    "select": [
-                        {
-                            "for": {
-                                "in": "id"
-                            }
-                        },
-                        {
-                            "for": {
-                                "in": "parentid"
-                            }
-                        },
-                        {
-                            "for": {
-                                "in": "name"
-                            }
-                        }
-                    ]
-                }
-            },
             "categorical": {
                 "categories": {
                     "select": [
                         { "for": { "in": "id" } },
                         { "for": { "in": "parentid" } },
-                        { "for": { "in": "name" } }
+                        { "for": { "in": "name" } },
+                        { "for": { "in": "properties" } }
                     ]
+                }
+            },
+            "table": {
+                "rows": {
+                    "for": {"in": "properties"}
                 }
             }
         }

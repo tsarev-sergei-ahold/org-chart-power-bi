@@ -15,7 +15,11 @@ type Selection<T extends d3.BaseType> = d3.Selection<T, any, any, any>;
 interface ITreeNodeData {
     id: string,
     parentId: string,
-    name: string
+    name: string,
+    properties?: {
+      name: string,
+      value: string
+    }[]
 };
 
 export class Visual implements IVisual {
@@ -66,7 +70,12 @@ export class Visual implements IVisual {
             {
                 id: val.toString(),
                 parentId: catDataView[1].values[idx].toString(),
-                name: catDataView[2].values[idx].toString()
+                name: catDataView[2].values[idx].toString(),
+                properties: catDataView.filter((prp) => { return prp.source.roles.properties; } ).map((pr) => (
+                {
+                  name: pr.source.displayName,
+                  value: pr.values[idx].toString()
+                })) 
             }
         ));
         console.log("All data", allData);
@@ -86,36 +95,31 @@ export class Visual implements IVisual {
             .compactMarginBetween((d) => 15)
             .compactMarginPair((d) => 80)
             .nodeContent((d, i, arr, state) => {
-                return `
-                <div style="padding-top:30px;background-color:none;margin-left:1px;height:${
-                    d.height
-                  }px;border-radius:2px;overflow:visible">
-                    <div style="height:${
-                      d.height - 32
-                    }px;padding-top:0px;background-color:white;border:1px solid lightgray;">
+              let allProperties = '';
+              d.data.properties.forEach(element => {
+                allProperties += `
+                <div style="display:flex;justify-content:space-between;padding-left:15px;padding-right:15px;">
+                  <div > ${element.name}</div>  
+                  <div > ${element.value}</div>    
+                </div>
+              `
+            });
+              return `
+                <div style="padding-top:30px;background-color:none;margin-left:1px;height:${d.height
+                }px;border-radius:2px;overflow:visible">
+                    <div style="height:${d.height - 32
+                }px;padding-top:0px;background-color:white;border:1px solid lightgray;">
       
-                      <img src=" ${
-                        d.data.imageUrl
-                      }" style="margin-top:-30px;border-radius:100px;width:60px;height:60px;" />
-      
-                     <div style="margin-right:10px;margin-top:15px;float:right">${
-                       d.data.id
-                     }</div>
-                     
+                      <img src=" ${d.data.imageUrl
+                }" style="margin-top:-30px;border-radius:100px;width:60px;height:60px;" />
+                         
                      <div style="margin-top:-30px;background-color:#3AB6E3;height:10px;border-radius:1px"></div>
       
                      <div style="padding:20px; padding-top:35px;text-align:center">
-                         <div style="color:#111672;font-size:16px;font-weight:bold"> ${
-                           d.data.name
-                         } </div>
-                         <div style="color:#404040;font-size:16px;margin-top:4px"> ${
-                           d.data.positionName
-                         } </div>
+                         <div style="color:#111672;font-size:16px;font-weight:bold"> ${d.data.name
+                } </div>
                      </div> 
-                     <div style="display:flex;justify-content:space-between;padding-left:15px;padding-right:15px;">
-                       <div > Manages:  ${d.data._directSubordinates} 👤</div>  
-                       <div > Oversees: ${d.data._totalSubordinates} 👤</div>    
-                     </div>
+                     ${allProperties}
                     </div>     
             </div>
                 `;
