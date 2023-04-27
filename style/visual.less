@@ -7,3 +7,23 @@ p {
         
     }
 }
+
+.node-content-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &__image {
+        height: 50px;
+        border-bottom: 1px solid grey;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        padding: 10px 0;
+
+        &__name {
+            font-weight: bold;
+        }
+    }
+}
