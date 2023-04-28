@@ -8,9 +8,25 @@ p {
     }
 }
 
+.section-title {
+    color: hsl(0,0%,30%);
+}
+
+.section-value {
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+.section {
+    margin-top: 10px;
+}
+
 .node-content-wrapper {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    border: 1px solid hsl(202,10%,88%);
+    border-radius: 10px;
 
     &__image {
         height: 50px;
@@ -20,10 +36,16 @@ p {
     &__info {
         display: flex;
         flex-direction: column;
-        padding: 10px 0;
+        padding: 0 20px;
 
         &__name {
             font-weight: bold;
+        }
+
+        &__potential {
+            &__value {
+                background: #ffeab6;
+            }
         }
     }
 }
