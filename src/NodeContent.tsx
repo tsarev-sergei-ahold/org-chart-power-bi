@@ -19,9 +19,8 @@ const renderProperties = (data: ITreeNodeData['properties']) => {
 
 export const NodeContent: React.FC<Props> = ({name, data}) => {
     return <div className="node-content-wrapper">
-        <div className="node-content-wrapper__image"></div>
+        <div className="node-content-wrapper__name">{name}</div>
         <div className="node-content-wrapper__info">
-            <div className="node-content-wrapper__info__name section">{name}</div>
             {renderProperties(data)}
         </div>
     </div>
