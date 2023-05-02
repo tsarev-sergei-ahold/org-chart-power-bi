@@ -10,7 +10,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Chart, { ITreeNodeData} from "./Chart";
 
-const DEFAULT_HEIGHT = 70;
+const DEFAULT_HEIGHT = 40;
 
 const DATA_PROPERTY_HEIGHT = 50;
 
