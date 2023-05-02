@@ -10,6 +10,10 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Chart, { ITreeNodeData} from "./Chart";
 
+const DEFAULT_HEIGHT = 70;
+
+const DATA_PROPERTY_HEIGHT = 50;
+
 export class Visual implements IVisual {
     private readonly target: HTMLElement;
     private readonly reactRoot: React.ComponentElement<any, any>;
@@ -52,8 +56,12 @@ export class Visual implements IVisual {
             }
         ));
 
+        const maxProperties = Math.max(...allData.map(d => d.properties.length));
+
+        const nodeHeight = DEFAULT_HEIGHT + (maxProperties * DATA_PROPERTY_HEIGHT);
+
         console.log("All data", allData);
 
-        Chart.UPDATE({data: allData, width, height});
+        Chart.UPDATE({data: allData, width, height, nodeHeight});
     }
 }

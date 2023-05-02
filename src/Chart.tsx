@@ -7,6 +7,7 @@ export interface State {
     data: ITreeNodeData[];
     width?: number;
     height?: number;
+    nodeHeight?: number;
 }
 
 export interface ITreeNodeData {
@@ -82,7 +83,7 @@ export class Chart extends React.Component<{}, State>{
             .data(this.state.data)
             .svgWidth(this.state.width)
             .svgHeight(this.state.height)
-            .nodeHeight(() => 200)
+            .nodeHeight(() => this.state.nodeHeight)
             .nodeWidth(() => 270)
             .childrenMargin(() => 40)
             .compactMarginBetween(() => 15)

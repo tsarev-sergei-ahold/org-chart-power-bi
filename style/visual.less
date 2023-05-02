@@ -10,11 +10,19 @@ p {
 
 .section-title {
     color: hsl(0,0%,30%);
+    opacity: 0.5;
 }
 
 .section-value {
     border-radius: 5px;
     padding: 2px 5px;
+    background: #e9eef9;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 70%;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .section {
@@ -40,12 +48,6 @@ p {
 
         &__name {
             font-weight: bold;
-        }
-
-        &__potential {
-            &__value {
-                background: #ffeab6;
-            }
         }
     }
 }

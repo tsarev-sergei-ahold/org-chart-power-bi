@@ -8,10 +8,10 @@ type Props = {
 
 const renderProperties = (data: ITreeNodeData['properties']) => {
     return data.map(property => {
-        if (property.name === "Potential" && property.value) {
-            return <div className="node-content-wrapper__info__potential section">
+        if (property.value) {
+            return <div className="section">
                 <div className="section-title">{property.name.toUpperCase()}</div>
-                <span className="node-content-wrapper__info__potential__value section-value">{property.value}</span>
+                <span className="section-value">{property.value}</span>
             </div>
         }
     })
