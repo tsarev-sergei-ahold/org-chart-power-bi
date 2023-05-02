@@ -7,3 +7,47 @@ p {
         
     }
 }
+
+.section-title {
+    color: hsl(0,0%,30%);
+    opacity: 0.5;
+}
+
+.section-value {
+    border-radius: 5px;
+    padding: 2px 5px;
+    background: #e9eef9;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 70%;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.section {
+    margin-top: 10px;
+}
+
+.node-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid hsl(202,10%,88%);
+    border-radius: 10px;
+
+    &__image {
+        height: 50px;
+        border-bottom: 1px solid grey;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+
+        &__name {
+            font-weight: bold;
+        }
+    }
+}
