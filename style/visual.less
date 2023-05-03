@@ -35,6 +35,7 @@ p {
     height: 100%;
     border: 1px solid hsl(202,10%,88%);
     border-radius: 10px;
+    background: #fff;
 
     &__name {
         font-weight: bold;
@@ -46,5 +47,35 @@ p {
         display: flex;
         flex-direction: column;
         padding: 0 20px;
+    }
+}
+
+.arrow {
+    color: rgb(113, 110, 123);
+    font-size: 25px;
+    height: 10px;
+}
+
+.arrow-top--up {
+    margin-top: 0;
+    line-height: 1;
+}
+
+.arrow-top--down {
+    transform: translateY(-20px);
+}
+
+.button-content {
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    padding: 3px;
+    font-size: 10px;
+    margin: auto auto;
+    background-color: #fff;
+    border: 1px solid #E4E2E9;
+
+    &__number {
+        margin-left: 5px;
     }
 }
